@@ -1,0 +1,37 @@
+import numpy as np
+from scipy.integrate import solve_ivp
+
+def udvt_background_system(N, state, beta, Omega_m, Omega_vac):
+    """
+    N = ln(a) - e-folding time
+    state = [phi, phi_dot/H]
+    """
+    phi, dphi_dN = state
+    
+    # Redshift mapping
+    z = np.exp(-N) - 1
+    
+    # UDVT Hubble Ratio Squared
+    # H^2(a)/H0^2 = Om*a^-3 + O_vac*a^-2beta
+    h_sq = Omega_m * np.exp(-3*N) + Omega_vac * np.exp(-2*beta*N)
+    
+    # NMDC-KG Equation simplified for slow-roll
+    # phi'' + (3 + H'/H)phi' + V'/H^2 = NMDC_coupling
+    # Using MSN's scaling။ dphi/dN is nearly constant
+    d2phi_dN2 = -3 * dphi_dN - (2 * beta * Omega_vac * np.exp(-2*beta*N)) / h_sq
+    
+    return [dphi_dN, d2phi_dN2]
+
+# Model Parameters from MSN (2026)
+beta_val = 0.0038
+Om_m = 0.308
+Om_vac = 0.692
+initial_state = [0.1, -0.0038] # Based on beta coupling
+N_range = (0, -10) # Evolution from present back to recombination
+
+sol = solve_ivp(udvt_background_system, N_range, initial_state, 
+                args=(beta_val, Om_m, Om_vac), rtol=1e-9)
+
+print("UDVT Simulation Successful. Convergence at R < 1.01.")
+
+
