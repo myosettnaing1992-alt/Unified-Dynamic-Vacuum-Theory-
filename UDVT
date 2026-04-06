@@ -1,4 +1,3 @@
-python
 UDVT - Unified Dynamic Vacuum Theory
 Numerical calculations for:
 1. Dark matter relic density (WIMP scenario)
@@ -11,12 +10,8 @@ from scipy.integrate import odeint, quad
 from scipy.constants import hbar, c, G, pi
 import matplotlib.pyplot as plt
 1. DARK MATTER RELIC DENSITY (WIMP miracle)
-
-
-def relic_density(m_sigma_gev, lambda_ph, T_freeze_ratio=20):
-    """
+def relic_density(m_sigma_gev, lambda_ph, T_freeze_ratio=20)
     Calculate Omega h^2 for sigma dark matter.
-    
     Parameters:
     m_sigma_gev : mass in GeV
     lambda_ph : Higgs-portal coupling
