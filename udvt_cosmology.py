@@ -1,4 +1,4 @@
-UDVT v2.0 - Cosmological Background Solver
+#UDVT v2.0 - Cosmological Background Solver
 Solves the modified Friedmann equation and scalar field evolution.
 """
 
