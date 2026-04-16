@@ -1,7 +1,8 @@
 # Unified Dynamic Vacuum Theory (UDVT) – Numerical Code
 
 This repository contains the numerical Python code accompanying the paper  
-**"Unified Dynamic Vacuum Theory (UDVT): A Complete Framework from Quantum Gravity to Particle Physics and Cosmology"**  
+**"UNIFIED DYNAMIC VACUUM THEORY (UDVT)
+A Complete Monograph: From Quantum Vacuum to Particles "**  
 by Myo Sett Naing.
 
 The code implements the key calculations of the paper:
@@ -11,7 +12,3 @@ The code implements the key calculations of the paper:
 - Gravitational wave backgrounds from cosmic strings, domain walls, and monopoles
 - CMB spectral distortions (μ and y)
 - Boltzmann equation integration for freeze-out
-## Requirements
-The code requires Python 3.7+ with the following packages:
-```bash
-pip install numpy scipy matplotlib
