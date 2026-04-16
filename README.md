@@ -34,3 +34,22 @@ pip install numpy scipy matplotlib
 
 ___
 
+import udvt_full_simulation
+udvt_full_simulation.run_full_udvt_simulation()
+--
+from udvt_myo_limit import myo_limit, safety_margin
+beta_max = myo_limit(Omega_vac=0.692, H0_s=67.4e3/3.086e22)
+print(f"β_max = {beta_max:.4f}")          # ≈ 0.01
+print(f"Safety margin = {safety_margin(0.0038, beta_max):.1f}%")
+--
+from udvt_mass_hierarchy import mass_from_winding_number
+for N in [1,2,3]:
+    m = mass_from_winding_number(N)
+    print(f"N={N}: {m*1000:.1f} MeV")
+--
+from udvt_quantum_info import UDVTQuantumInfo
+qi = UDVTQuantumInfo()
+print(f"Holevo capacity: {qi.holevo_capacity(1, 1e-43):.2e} bits")
+print(f"Muon decoherence time: {qi.decoherence_time(0.1057):.2e} s")
+--
+
