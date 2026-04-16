@@ -31,9 +31,7 @@ All predictions are **falsifiable** by experiments currently under construction 
 
 ```bash
 pip install numpy scipy matplotlib
-
 ___
-
 import udvt_full_simulation
 udvt_full_simulation.run_full_udvt_simulation()
 --
