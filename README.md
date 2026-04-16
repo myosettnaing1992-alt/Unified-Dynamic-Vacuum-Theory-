@@ -11,10 +11,7 @@ The code implements the key calculations of the paper:
 - Gravitational wave backgrounds from cosmic strings, domain walls, and monopoles
 - CMB spectral distortions (μ and y)
 - Boltzmann equation integration for freeze-out
-
 ## Requirements
-
 The code requires Python 3.7+ with the following packages:
-
 ```bash
 pip install numpy scipy matplotlib
