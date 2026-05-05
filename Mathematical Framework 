@@ -1,0 +1,10 @@
+ Mathematical Framework (UDVT Chapter 4)
+
+The numerical implementations in this repository are derived from the modified Einstein-Hilbert action:
+$$S = \int d^4x \sqrt{-g} \left[ \frac{M_{\mathrm{Pl}}^2}{2} (1+B(\phi)) R - \frac{1}{2}(\partial\phi)^2 - V(\phi) \right]$$
+
+### Key Theoretical Pillars:
+* **Disformal Coupling:** The vacuum dynamics are governed by $B(\phi)$, which regulates the strength of gravity.
+* **Scale-Dependent Gravity:** UDVT predicts a suppression of the matter power spectrum at small scales ($k > k_{\mathrm{Myo}}$):
+  $$G_{\mathrm{eff}}(k,t) = \frac{G_N}{1+B(\phi)} \cdot \frac{1}{1 + (k/k_{\mathrm{Myo}})^2}$$
+* **The Myo Limit:** The stability of the theory is maintained by the bound $\beta \leq 0.01$ (or $B(\phi) > -1$), preventing singular outcomes in high-energy regimes.
