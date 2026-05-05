@@ -52,6 +52,52 @@ def sigma8_udvt(beta, Omega_m, sigma8_lcdm=0.811):
     
     Returns:
     sigma8_udvt : float
+import numpy as np
+
+def calculate_effective_g(k, B_phi, k_myo, G_N=6.67430e-11):
+    """
+    Calculates the scale-dependent effective gravitational constant (G_eff) 
+    according to Unified Dynamic Vacuum Theory (UDVT) Chapter 4.
+    
+    Parameters:
+    -----------
+    k : float or ndarray
+        Wavenumber in h/Mpc.
+    B_phi : float
+        The disformal coupling factor B(phi) at a given epoch.
+        (Note: B(phi) > -1 to satisfy the Myo Limit).
+    k_myo : float
+        The characteristic scale of the Myo Limit (typically ~0.5 h/Mpc).
+    G_N : float, optional
+        Standard Newton's constant. Default is SI units.
+
+    Returns:
+    --------
+    G_eff : float or ndarray
+        The modified gravitational constant at scale k.
+    """
+    
+    # Validation for the Myo Limit safety margin
+    if np.any(B_phi <= -1):
+        raise ValueError("Myo Limit Violation: B(phi) must be greater than -1.")
+
+    # Term 1: Background modification due to disformal coupling
+    background_mod = G_N / (1 + B_phi)
+    
+    # Term 2: Scale-dependent suppression factor (The Myo Factor)
+    # As k increases (smaller scales), gravity is suppressed.
+    suppression_factor = 1 / (1 + (k / k_myo)**2)
+    
+    effective_g = background_mod * suppression_factor
+    
+    return effective_g
+
+# Example Usage:
+# k_vals = np.array([0.01, 0.1, 0.5, 1.0, 10.0]) # h/Mpc
+# g_vals = calculate_effective_g(k_vals, B_phi=0.0038, k_myo=0.5)def get_G_eff(k, a, B_phi, k_myo):
+    G_N = 6.67430e-11
+    # From Chapter 4: G_eff(k,t) = G_N / (1+B) * 1 / (1 + k^2/k_myo^2)
+    return (G_N / (1 + B_phi)) * (1 / (1 + (k/k_myo)**2))
     """
     # Approximate suppression factor from late-time growth modification
     suppression = 1.0 - 0.5 * beta
@@ -64,3 +110,25 @@ if __name__ == "__main__":
     D = growth_factor_udvt(a_arr, beta, Omega_m)
     sigma8_pred = sigma8_udvt(beta, Omega_m)
     print(f"UDVT sigma_8 prediction: {sigma8_pred:.4f} (observed: 0.750±0.015)")
+def growth_ode(a, y, B_phi, k_myo, Omega_m0):
+    """
+    Defines the ODE for the linear growth factor D(a) in UDVT.
+    y[0] = D (growth factor)
+    y[1] = dD/da
+    """
+    D, dD_da = y
+    
+    # Calculate G_eff/G_N modification for a specific k-scale
+    # Note: k is usually fixed here to see the scale-dependent growth
+    k_test = 0.1 # h/Mpc example
+    g_ratio = calculate_effective_g(k_test, B_phi, k_myo) / 6.67430e-11
+    
+    # Modified Growth Equation (simplified version)
+    # d^2D/da^2 + (3/a + dH/da / H) dD/da - 1.5 * Omega_m(a)/a^2 * (G_eff/G_N) * D = 0
+    # This g_ratio directly drives the suppression of σ8
+    
+    term1 = -(3/a) * dD_da # Assuming LCDM-like expansion for friction term
+    term2 = 1.5 * (Omega_m0 / a**3) * g_ratio * D
+    
+    return [dD_da, term1 + term2]
+    
