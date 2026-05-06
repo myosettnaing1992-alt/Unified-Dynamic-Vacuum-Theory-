@@ -1,0 +1,16 @@
+"""
+UDVT Universal Constants Configuration
+This file centralizes all physical constants and theory-specific parameters.
+"""
+
+# The Myo-Limit (Fundamental update rate)
+BETA = 0.0038
+
+# Cosmological Constants (Planck 2018 base)
+H0_REFERENCE = 67.4  # km/s/Mpc
+OMEGA_M = 0.315      # Matter density
+OMEGA_L = 0.685      # Vacuum density
+
+# Physical Constants
+SPEED_OF_LIGHT = 299792458  # m/s
+PLANCK_MASS_GEV = 1.22e19   # GeV
