@@ -1,25 +1,4 @@
-# Unified Dynamic Vacuum Theory (UDVT) – Numerical Code
-name: UDVT CI/CD Pipeline
-
-on: [push, pull_request]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-node: '3.9'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Theory Stability Tests
-      run: |
-        python -m unittest discover tests/
-        
+# Unified Dynamic Vacuum Theory (UDVT) – Numerical Code     
 [![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
