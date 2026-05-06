@@ -32,8 +32,10 @@ pip install numpy scipy matplotlib
 ___
 
 import numpy as np
+
 from scipy.integrate import odeint
 class UDVT_Core_Cosmology:
+
     """
     Unified Dynamic Vacuum Theory (UDVT) - Part 1: Core Engine & Cosmology
     
@@ -55,6 +57,7 @@ class UDVT_Core_Cosmology:
         # Constants
         self.c0 = 299792458.0 # Speed of light in SI (m/s)
 
+
     # --- 1. Core Physics Factors ---
 
     def vsl_factor(self, a):
@@ -71,6 +74,7 @@ class UDVT_Core_Cosmology:
         M_eff^2 = M_pl^2 * (1 + beta * phi^2)
         """
         return 1.0 + (self.beta * phi**2)
+
 
     # --- 2. Cosmological Dynamics ---
 
